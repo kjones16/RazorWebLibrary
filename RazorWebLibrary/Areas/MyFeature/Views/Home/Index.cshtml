@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model RazorWebLibrary.Areas.MyFeature.Models.HomeModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>@Model.Title</h1>
+<br />
+<button type="button" onclick="MyFeature.showMessage('@Model.Message');">Show Message</button>
+
+@section Scripts {
+    <script src="~/js/MyFeature.js" asp-append-version="true"></script>
+}
+
+
