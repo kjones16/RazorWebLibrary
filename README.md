@@ -13,9 +13,9 @@ I order to access the js files created by typescript from the referenced web sit
 3. Add references to Microsoft.AspNetCore.StaticFiles, Microsoft.Extensions.FileProviders.Embedded, 
    and Microsoft.Extensions.FileProviders.Physical. You will need the Physical during development so you didn't have to restart the 
    web site after making changes to the TypeScript or cshtml view files.
-4. Implement IPostConfigureOptions<StaticFileOptions> which allows aspnet to resolve the embedded files. The sample code 
+4. Implement ```IPostConfigureOptions<StaticFileOptions>``` which allows aspnet to resolve the embedded files. The sample code 
    also looks at the physical files during development.
-5. Implement IPostConfigureOptions<RazorViewEngineOptions> for development support.
+5. Implement ```IPostConfigureOptions<RazorViewEngineOptions>``` for development support.
 
 RazorWebLibrary.csproj
 ```
