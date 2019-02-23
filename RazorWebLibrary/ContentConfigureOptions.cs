@@ -32,7 +32,7 @@ namespace RazorWebLibrary
             if (_environment.IsDevelopment())
             {
                 // Looks at the physical files on the disk so it can pick up changes to files under wwwroot while the application is running is Visual Studio.
-                // The last PhysicalFileProvider TypeScript debugging but only wants to work with IE. I currently unsure how to get TS break points to hit with Chrome.
+                // The last PhysicalFileProvider enalbles TypeScript debugging but only wants to work with IE. I'm currently unsure how to get TS breakpoints to hit with Chrome.
                 options.FileProvider = new CompositeFileProvider(options.FileProvider, 
                                                                  new PhysicalFileProvider(Path.Combine(_environment.ContentRootPath, $"..\\{GetType().Assembly.GetName().Name}\\wwwroot")),
                                                                  new PhysicalFileProvider(Path.Combine(_environment.ContentRootPath, $"..\\{GetType().Assembly.GetName().Name}")));
