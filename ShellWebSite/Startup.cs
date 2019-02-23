@@ -46,6 +46,7 @@ namespace ShellWebSite
             }
 
             app.UseStaticFiles();
+            //app.UseDirectoryBrowser();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

@@ -29,20 +29,22 @@ namespace RazorWebLibrary
 
             options.FileProvider = options.FileProvider ?? _environment.WebRootFileProvider;
 
-            IFileProvider fileProvider;
-
             if (_environment.IsDevelopment())
             {
                 // Looks at the physical files on the disk so it can pick up changes to files under wwwroot while the application is running is Visual Studio.
-                fileProvider = new PhysicalFileProvider(Path.Combine(_environment.ContentRootPath, $"..\\{GetType().Assembly.GetName().Name}\\wwwroot"));
+                // The last PhysicalFileProvider TypeScript debugging but only wants to work with IE. I currently unsure how to get TS break points to hit with Chrome.
+                options.FileProvider = new CompositeFileProvider(options.FileProvider, 
+                                                                 new PhysicalFileProvider(Path.Combine(_environment.ContentRootPath, $"..\\{GetType().Assembly.GetName().Name}\\wwwroot")),
+                                                                 new PhysicalFileProvider(Path.Combine(_environment.ContentRootPath, $"..\\{GetType().Assembly.GetName().Name}")));
             }
             else
             {
                 // When deploying use the files that are embedded in the assembly.
-                fileProvider = new ManifestEmbeddedFileProvider(GetType().Assembly, "wwwroot");
+                options.FileProvider = new CompositeFileProvider(options.FileProvider, 
+                                                                 new ManifestEmbeddedFileProvider(GetType().Assembly, "wwwroot")); 
             }
 
-            options.FileProvider = new CompositeFileProvider(options.FileProvider, fileProvider);
+            _environment.WebRootFileProvider = options.FileProvider; // required to make asp-append-version work as it uses the WebRootFileProvider. https://github.com/aspnet/Mvc/issues/7459
         }
     }
 }
